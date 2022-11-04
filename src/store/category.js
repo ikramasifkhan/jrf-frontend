@@ -53,7 +53,8 @@ export default {
 
         SET_TOTAL_TODO(state, total){
             state.totalTodo = total
-        }
+        },
+
     },
     actions: {
         addCategory({state, commit}){
@@ -117,6 +118,7 @@ export default {
                     .then(({data}) => {
                         if(data.success === true){
                             commit("UPDATE_CATEGORY_LIST_AFTER_DELETE", data.data)
+                            commit("todo/UPDATE_TODO_LIST_AFTER_CATEGORY_DELETE", data.data.id, {root: true})
                             notification.successNotification(data.message)
                         }
                     }).catch((error) => {

@@ -46,6 +46,18 @@ export default {
                 }
             })
         },
+
+        UPDATE_TODO_LIST_AFTER_DELETE(state, deletedTodo){
+            state.todos = state.todos.filter((todo)=>{
+                return Number(todo.id) !== Number(deletedTodo.id)
+            })
+        },
+
+        UPDATE_TODO_LIST_AFTER_CATEGORY_DELETE(state, deletedCategoryId){
+            state.todos = state.todos.filter((todo)=>{
+                return Number(todo.category_id) !== Number(deletedCategoryId)
+            })
+        }
     },
     actions:{
         addTodo({state, commit}){
@@ -118,7 +130,22 @@ export default {
             }
         },
 
+        removeTodo({state, commit}, todoId){
+            try {
+                axios.delete(`todos/${todoId}`)
+                    .then(({data}) => {
+                        if(data.success === true){
+                            commit("UPDATE_TODO_LIST_AFTER_DELETE", data.data)
+                            notification.successNotification(data.message)
+                        }
+                    }).catch((error) => {
+                    console.log(error)
+                })
 
+            } catch (error) {
+                console.log(error)
+            }
+        }
 
     }
 }

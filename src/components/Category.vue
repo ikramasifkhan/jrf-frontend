@@ -44,7 +44,7 @@
                         :key="i"
                     >
                       <v-list-item-icon>
-                        <v-icon @click="removeCategory(category.id)">mdi-delete</v-icon>
+                        <v-icon @click="removeCategory(category.id)">mdi-close</v-icon>
                       </v-list-item-icon>
                       <v-list-item-content>
                         <v-list-item-title v-text="category.name"></v-list-item-title>

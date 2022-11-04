@@ -25,9 +25,7 @@
       <v-layout row wrap>
         <v-col col="12">
           <template>
-            <v-card
-                class="mx-auto"
-            >
+            <v-card class="mx-auto">
               <v-list>
                 <v-list-item-group>
                   <v-list-item
@@ -42,6 +40,9 @@
                     <v-list-item-content>
                       <v-list-item-title v-text="todo.name"></v-list-item-title>
                     </v-list-item-content>
+                    <v-list-item-icon>
+                      <v-icon @click="removeTodo(todo.id)">mdi-close</v-icon>
+                    </v-list-item-icon>
                   </v-list-item>
                 </v-list-item-group>
               </v-list>
@@ -80,7 +81,7 @@ name: "CategoryDetails",
     ]),
 
     ...mapActions('todo', [
-      "getTodoList", "getTodoListByCategoryId", "changeTodoStatusByTodoId"
+      "getTodoList", "getTodoListByCategoryId", "changeTodoStatusByTodoId", "removeTodo"
     ])
   }
 }
